@@ -6,7 +6,7 @@ I know, I know. It's an oversaturated mod niche for this game, but the thing tha
 
 At this *extremely* early stage, I just wanna mess with the physics. However, I would like to mess with Sonic's combat and the control layout in the future.
 
-## Changes 🔵
+## Current Changes 🔵
 
 - Sonic's deceleration has been drastically reduced; his speed cap is practically gone, allowing the player to gain speed running downhill without boost
 - Sonic's falling deceleration has been drastically reduced as well
@@ -19,6 +19,13 @@ At this *extremely* early stage, I just wanna mess with the physics. However, I 
 - Decreased minimum slide speed
 - Modified spin boost (vanilla spin dash) max speed and deceleration
 - Made spin boost flinging better
+
+### Future Changes (aka things idk how to change yet lol) ⏩
+
+- Spin charge actually determines the initial speed of the spin boost
+- The initial speed for spin boost without charging matches Sonic's prior running speed
+- Spin charging mid-air doesn't kill forward momentum
+- Detach spin boost from boost gauge maybe???
 
 ## Issues 🔴
 
