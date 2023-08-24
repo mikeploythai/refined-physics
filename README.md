@@ -16,6 +16,9 @@ At this *extremely* early stage, I just wanna mess with the physics. However, I 
 - Max parry time has been reduced to 0.3s so it could be more challenging (added here for funsies)
 - The lightspeed dash no longer brings Sonic to a halt after dashing through a trail
 - Letting go of the boost while wall running no longer brings Sonic to an instant halt
+- Decreased minimum slide speed
+- Modified spin boost (vanilla spin dash) max speed and deceleration
+- Made spin boost flinging better
 
 ## Recommendations ✨
 
