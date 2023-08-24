@@ -93,7 +93,7 @@ Here are the resouces I used to develop this project!
   - damperRange: 15 > 10
   
   modePackage > fall
-  - deceleForce: 20 > 5 (NOTE: might increase. Sonic's horizontal momentum after an air boost is CRAZY bc of this lol)
+  - deceleForce: 20 > 5
   - overSpeedDeceleForce: 40 > 10
   
   modePackage > grind
@@ -103,15 +103,15 @@ Here are the resouces I used to develop this project!
   
   modePackage > boost
   - consumptionRate: 6 > 100
-  - recoveryRate: 30 > 5
+  - recoveryRate: 30 > 15
   - recoveryByAttack: 3 > 0
   - infinityBoostTime: 180 > 60
   
   modePackage > airboost
-  - startHSpeed: 25 > 100
-  - startHSpeedMax: 50 > 100
-  - minHSpeed: 20 > 100
-  - maxHSpeed: 40 > 100
+  - startHSpeed: 25 > 40
+  - startHSpeedMax: 50 > 60
+  - minHSpeed: 20 > 40
+  - minHSpeedMax: 40 > 60
   - brakeTime: 0.5 > 0
   - minKeepTime: 0.1 > 0
   - maxKeepTime: 0.5 > 0
@@ -125,7 +125,28 @@ Here are the resouces I used to develop this project!
   modePackage > wallmove
   - brake: 100 > 15
   
+  modePackage > sliding
+  - minSpeed: 25 > 5
+  
   lightDash
-  - brake: 200 > 50
+  - brake: 200 > 75
+  
+  spinBoost
+  - initialRunTime: 0.5 > 0.2
+  
+  spinBoost > speedBoost
+  - initialSpeed: 65 > 75
+  - maxSpeed: 55 > 3
+  - minTurnSpeed: 20 > 30
+  
+  speedBoost > decele
+  - force: 40 > 10
+  - force2: 40 > 10
+  
+  speedBoost > deceleNeutralMin
+  - force: 1500 > 750
+  
+  speedBoost > deceleNeutralMax
+  - force: 2000 > 1000
   ```
 </details>
