@@ -20,6 +20,11 @@ At this *extremely* early stage, I just wanna mess with the physics. However, I 
 - Modified spin boost (vanilla spin dash) max speed and deceleration
 - Made spin boost flinging better
 
+## Issues 🔴
+
+- Can't spin charge/spin boost when the boost gauge is depleted
+  - Might consider this a feature to incentive players to use the boost and spin boost strategically???
+
 ## Recommendations ✨
 
 [Legacy Spin Dash by Weezley](https://gamebanana.com/mods/462772): Using this mod along with Refined Physics has been fun during testing, and is really close to my vision for what Sonic's spin dash should be in the game! However, I might try to dabble with the spin dash myself to make the mechanic exactly how I want it.
