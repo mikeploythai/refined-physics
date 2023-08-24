@@ -4,7 +4,7 @@ I like the vanilla physics of Sonic Frontiers, but holy shit the most annoying t
 
 I know, I know. It's an oversaturated mod niche for this game, but the thing that's bothered me about all the other physics mods is that it deviates a bit too much from the vanilla feel. Some have Sonic's base running speed at a crazy high amount, some make it a bit way too difficult for Sonic to simply walk up a hill, and some just simply don't feel 100% to my liking. I want this mod to feel a good amount like vanilla movement, but with refinement and quality of life changes.
 
-At this *extremely* early stage, I just wanna mess with the physics. However, I would like to mess with Sonic's combat and the control layout in the future.
+At this _extremely_ early stage, I just wanna mess with the physics. However, I would like to mess with Sonic's combat and the control layout in the future.
 
 ## Current Changes 🔵
 
@@ -19,6 +19,7 @@ At this *extremely* early stage, I just wanna mess with the physics. However, I 
 - Decreased minimum slide speed
 - Modified spin boost (vanilla spin dash) max speed and deceleration
 - Made spin boost flinging better
+- Increase Sonic's jump speed limit
 
 ### Future Changes (aka things idk how to change yet lol) ⏩
 
@@ -43,41 +44,44 @@ At this *extremely* early stage, I just wanna mess with the physics. However, I 
   // Camera
   Disable Spin Charge Camera
 
-  // Cheats
-  Always Unlocked Spin Dash
+// Cheats
+Always Unlocked Spin Dash
 
-  // Fixes
-  Literally everything in this category
+// Fixes
+Literally everything in this category
 
-  // Gameplay
-  Allow Attacking from Stomp Bounce
-  Disable Loop Kick on Slide
+// Gameplay
+Allow Attacking from Stomp Bounce
+Disable Loop Kick on Slide
 
-  If you play with the legacy spin dash mod:
-    Disable Spin Slash on Drop Dash
-    Drop Dash on Double Jump
+If you play with the legacy spin dash mod:
+Disable Spin Slash on Drop Dash
+Drop Dash on Double Jump
 
-  Else if you don't play with the legacy spin dash mod:
-    Allow Spin Dash on Dash Panels
-    Always Trickable Spin Dash Exit
-    Disable Drop Dash
-  
-  // Physics
-  Literally everything in this category
-  ```
+Else if you don't play with the legacy spin dash mod:
+Allow Spin Dash on Dash Panels
+Always Trickable Spin Dash Exit
+Disable Drop Dash
+
+// Physics
+Literally everything in this category
+
+```
 </details>
 
 <details>
-  <summary>Recommended in-game physics settings</summary>
-  
-  ```
-  // Only what to change
+<summary>Recommended in-game physics settings</summary>
 
-  Starting Speed: 15
-  Acceleration: 15
-  Jump Deceleration: 25 (I'm pretty sure the "Retain Ground Velocity for Jump" HMM code overrides this, but I have it set to this anyway)
-  Deceleration Rate: 15
-  ```
+```
+
+// Only what to change
+
+Starting Speed: 15
+Acceleration: 15
+Jump Deceleration: 25 (I'm pretty sure the "Retain Ground Velocity for Jump" HMM code overrides this, but I have it set to this anyway)
+Deceleration Rate: 15
+
+```
 </details>
 
 ## Development ⚙️
@@ -91,77 +95,99 @@ Here are the resouces I used to develop this project!
 - [Tracker's Physics Tweaks](https://gamebanana.com/mods/415617). I unpacked this mod's `playercommon.pac` to see what parameters are modified to figure out what to actually mess with in `player_common.rfl`. Cool physics mod btw!
 
 <details>
-  <summary>The specific values I changed in <code>player_common.rfl</code></summary>
-  
-  ```
-  // Using Skyth's RFL template
+<summary>The specific values I changed in <code>player_common.rfl</code></summary>
 
-  // REFERENCE
-  path > to > parameters
-  - parameter: vanilla value > value I changed it to
+```
 
-  // The following parameters are found within the path: sonicParameters > forwardView
+// Using Skyth's RFL template
 
-  modePackage > speed > decele
-  - force: 60 > 5
-  - force2: 60 > 5
-  - damperRange: 15 > 10
-  
-  modePackage > fall
-  - deceleForce: 20 > 5
-  - overSpeedDeceleForce: 40 > 10
-  
-  modePackage > grind
-  - maxSpeed: 30 > 60
-  - deceleForce: 30 > 10
-  - limitMinSpeed: 15 > 5
-  
-  modePackage > boost
-  - consumptionRate: 6 > 100
-  - recoveryRate: 30 > 15
-  - recoveryByAttack: 3 > 0
-  - infinityBoostTime: 180 > 60
-  
-  modePackage > airboost
-  - startHSpeed: 25 > 40
-  - startHSpeedMax: 50 > 60
-  - minHSpeed: 20 > 40
-  - minHSpeedMax: 40 > 60
-  - brakeTime: 0.5 > 0
-  - minKeepTime: 0.1 > 0
-  - maxKeepTime: 0.5 > 0
-  - maxTime: 2 > 0
-  
-  modePackage > parry
-  - minRecieveTime: 0.2 > 0.15
-  - maxRecieveTime: 15 > 0.3
-  - justEffectTime2: 5 > 1
-  
-  modePackage > wallmove
-  - brake: 100 > 15
-  
-  modePackage > sliding
-  - minSpeed: 25 > 5
-  
-  lightDash
-  - brake: 200 > 75
-  
-  spinBoost
-  - initialRunTime: 0.5 > 0.2
-  
-  spinBoost > speedBoost
-  - initialSpeed: 65 > 75
-  - maxSpeed: 55 > 3
-  - minTurnSpeed: 20 > 30
-  
-  speedBoost > decele
-  - force: 40 > 10
-  - force2: 40 > 10
-  
-  speedBoost > deceleNeutralMin
-  - force: 1500 > 750
-  
-  speedBoost > deceleNeutralMax
-  - force: 2000 > 1000
-  ```
+// REFERENCE
+path > to > parameters
+
+- parameter: vanilla value > value I changed it to
+
+// The following parameters are found within the path: sonicParameters > forwardView
+
+modePackage > speed > decele
+
+- force: 60 > 5
+- force2: 60 > 5
+- damperRange: 15 > 10
+
+modePackage > fall
+
+- deceleForce: 20 > 5
+- overSpeedDeceleForce: 40 > 10
+
+modePackage > grind
+
+- maxSpeed: 30 > 60
+- deceleForce: 30 > 10
+- limitMinSpeed: 15 > 5
+
+modePackage > boost
+
+- consumptionRate: 6 > 100
+- recoveryRate: 30 > 15
+- recoveryByAttack: 3 > 0
+- infinityBoostTime: 180 > 60
+
+modePackage > airboost
+
+- startHSpeed: 25 > 40
+- startHSpeedMax: 50 > 60
+- minHSpeed: 20 > 40
+- minHSpeedMax: 40 > 60
+- brakeTime: 0.5 > 0
+- minKeepTime: 0.1 > 0
+- maxKeepTime: 0.5 > 0
+- maxTime: 2 > 0
+
+modePackage > parry
+
+- minRecieveTime: 0.2 > 0.15
+- maxRecieveTime: 15 > 0.3
+- justEffectTime2: 5 > 1
+
+modePackage > wallmove
+
+- brake: 100 > 15
+
+modePackage > sliding
+
+- minSpeed: 25 > 5
+
+modePackage > jumpSpeed
+
+- limitUpSpeed: 20 > 40
+
+lightDash
+
+- brake: 200 > 75
+
+spinBoost
+
+- initialRunTime: 0.5 > 0.2
+
+spinBoost > speedBoost
+
+- initialSpeed: 65 > 75
+- maxSpeed: 55 > 3
+- minTurnSpeed: 20 > 30
+
+speedBoost > decele
+
+- force: 40 > 10
+- force2: 40 > 10
+
+speedBoost > deceleNeutralMin
+
+- force: 1500 > 750
+
+speedBoost > deceleNeutralMax
+
+- force: 2000 > 1000
+
+```
 </details>
+```
