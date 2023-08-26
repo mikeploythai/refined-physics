@@ -1,2 +1,0 @@
-add physics.hmm
-add mod.ini
