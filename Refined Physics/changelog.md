@@ -1,3 +1,13 @@
+## Refined Physics v1.0-alpha.4
+
+- General refactoring of codes
+- Split ground and air deceleration codes into 2
+- Added code for more challenging parry
+- Rebalanced air boost
+- Increased wall-running brake force
+- Spin boost speed increases if power boost is active
+- Added code for faster boost consumption
+
 ## Refined Physics v1.0-alpha.3
 
 - Reworked mod to use HMM codes rather than modifying playercommon.pac
