@@ -98,6 +98,13 @@ At this early stage, I just wanna mess with the physics. However, I would like t
   Makes the parry last 0.3s instead of 15s.
 </details>
 
+## WIP 🔴
+
+- Retain prior forward velocity when spin charging mid-air (pls help)
+- Cyberspace 3D physics
+- Cyberspace 2D physics
+- Water physics
+
 ## Mandatory Codes/Settings ⚙️
 
 <details>
