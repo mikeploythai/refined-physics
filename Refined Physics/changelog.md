@@ -1,3 +1,8 @@
+## Refined Physics v1.0-beta
+
+- Added configuration UI
+- Public beta release 🎉
+
 ## Refined Physics v1.0-alpha.4
 
 - General refactoring of codes

@@ -1,0 +1,117 @@
+{
+  "Groups": [
+    {
+      "Name": "openZone",
+      "DisplayName": "Open Zone",
+      "Elements": [
+        {
+          "Name": "decGroundDecele",
+          "DisplayName": "Decreased Ground Deceleration",
+          "Description": [
+            "Decreases Sonic's deceleration on ground, allowing him to gain speed naturally without boosting and to prevent instant momentum loss after boosting/power boosting."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "decFallDecele",
+          "DisplayName": "Decreased Falling Deceleration",
+          "Description": [
+            "Decreases Sonic's deceleration in air, allowing him to retain his forward momentum while falling uncurled."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "momentumRails",
+          "DisplayName": "Momentum Rails",
+          "Description": [
+            "Makes rails more momentum-based, allowing Sonic to gain/decrease speed when going up/down rails.\n",
+            "Additionally, the minimum rail grinding speed has been decreased, and maximum rail speed is increased.\n",
+            "This does NOT remove Sonic's minimum rail speed."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "gensAirBoost",
+          "DisplayName": "Generations-Styled Air Boost",
+          "Description": [
+            "Makes the air boost act similar to the one in Sonic Generations."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "wallBrake",
+          "DisplayName": "Brake Easing for Wall Running",
+          "Description": [
+            "Makes Sonic ease into a stop when letting go of the boost button while wall running."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "minSlide",
+          "DisplayName": "Decreased Minimum Slide Speed",
+          "Description": ["Decreased the minimum sliding speed."],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "softLSDBrake",
+          "DisplayName": "Softer Light Speed Dash Brake",
+          "Description": [
+            "Prevents Sonic from coming to an instant stop after light speed dashing."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "ezJump",
+          "DisplayName": "Easier Incline Jumps",
+          "Description": ["Makes incline jumps easier."],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "betterSpinBoost",
+          "DisplayName": "Better Spin Boost",
+          "Description": [
+            "Inspired by Weezley's Legacy Spin Dash mod!\n",
+            "Spin boost is now momentum-based.\n",
+            "Spin boosting without charging retains Sonic's prior forward momentum, making it act like a normal roll.\n",
+            "Spin charging on the ground determines how fast the spin boost is after releasing the charge. 5 charges = max speed.\n",
+            "In the air, the longer the player holds the spin charge button, the faster the resulting spin boost will be once Sonic hits the ground.\n",
+            "Flinging off a platform while spin boosting is now much smoother (I think)."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "fasterBoostGauge",
+          "DisplayName": "Faster Boost Consumption",
+          "Description": [
+            "Since Sonic can retain his momentum better in Refined Physics, there's no need for him to boost for a long time.\n",
+            "Additionally, I wanted to explore how boost and spin dash can co-exist without one losing purpose due the other.\n",
+            "IMO: the boost should be a method to gain speed quickly, with the trade-off that Sonic remains vulnerable. The spin dash should be a method to both gain speed and attack enemies, with the trade-off that the player must charge it.\n",
+            "Credits to Proto's Cyberspace Overhaul mod for inspiring me to explore this boost-as-dash idea many, many months ago. Weezley's awesome High Speed Style mod explores the idea as well!"
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "harderParry",
+          "DisplayName": "Harder Parry",
+          "Description": [
+            "Not really physics-related, but I added it anyway lmao\n",
+            "Makes the parry last 0.3s instead of 15s."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        }
+      ]
+    }
+  ],
+  "IniFile": "config.ini"
+}
