@@ -87,7 +87,7 @@ At this early stage, I just wanna mess with the physics. However, I would like t
   
   IMO: the boost should be a method to gain speed quickly, with the trade-off that Sonic remains vulnerable. The spin dash should be a method to both gain speed and attack enemies, with the trade-off that the player must charge it.
   
-  Credits to Proto's [Cyberspace Overhaul mod](https://gamebanana.com/mods/430615) for inspiring me to explore this boost-as-dash idea many, many months ago. Weezley's awesome [High Speed Style mod](https://gamebanana.com/mods/464066) explores the idea as well!
+  Credits to Proto's [Cyberspace Overhaul mod](https://gamebanana.com/mods/430615) for inspiring me to explore this boost-as-dash idea many, many months ago. LexStorm's awesome [High Speed Style mod](https://gamebanana.com/mods/464066) explores the idea as well!
 </details>
 
 <details>
