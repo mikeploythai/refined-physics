@@ -1,3 +1,8 @@
+## Refined Physics v1.0-beta1.1
+
+- Decreased boost gauge consumption during spin dash from 50 to 25
+- Re-balanced initial spin boost speed
+
 ## Refined Physics v1.0-beta
 
 - Added configuration UI
