@@ -11,7 +11,7 @@ Code "Decreased Ground Deceleration" by "mploythai"
 
   static float deceleForce = 5f;
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
@@ -41,7 +41,7 @@ Code "Decreased Falling Deceleration" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
@@ -71,7 +71,7 @@ Code "Momentum Rails" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
@@ -102,7 +102,7 @@ Code "Generations-Styled Air Boost" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
@@ -141,7 +141,7 @@ Code "Brake Easing for Wall Running" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
    if (!isLoaded) {
@@ -170,7 +170,7 @@ Code "Decreased Minimum Slide Speed" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
    if (!isLoaded) {
@@ -199,7 +199,7 @@ Code "Softer Light Speed Dash Brake" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
@@ -228,7 +228,7 @@ Code "Easier Incline Jumps" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
@@ -262,7 +262,7 @@ Code "Better Spin Boost" by "mploythai"
   static float chargeCount = 0f;
   static float deceleForce = 5f;
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
@@ -278,19 +278,18 @@ Code "Better Spin Boost" by "mploythai"
     var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
     if (SonicParams.pData == null) return;
 
-    var minSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 32.5f : 40f;
-    var maxSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 65f : 80f;
-    var addedSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 6.5f : 10f;
+    var minSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 35f : 55f;
+    var maxSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 55f : 75f;
 
     if (Sonic.IsGrounded() && Sonic.State.GetCurrentStateID() == Sonic.StateID.StateSpinBoostCharge) {
       if (Sonic.Input.IsPressed(Sonic.PlayerActionType.PlayerSonicboom))
         chargeCount += 1f;
       
-      dashVelocity = MathHelpers.Clamp((minSpeed - addedSpeed) + (chargeCount * addedSpeed), minSpeed, maxSpeed);
+      dashVelocity = MathHelpers.Clamp((minSpeed - 5) + (chargeCount * 5), minSpeed, maxSpeed);
     } else if (!Sonic.IsGrounded()) {
       // potentially add forward momentum code here in the future
 
-      if (Sonic.Input.IsDown(Sonic.PlayerActionType.PlayerSonicboom) && Sonic.State.GetCurrentStateID() == Sonic.StateID.StateSpinBoostCharge) {
+      if (Sonic.State.GetCurrentStateID() == Sonic.StateID.StateSpinBoostCharge) {
         chargeCount += 1f;
         dashVelocity = MathHelpers.Clamp(chargeCount / 1.25f, minSpeed, maxSpeed);
       }
@@ -320,7 +319,7 @@ Code "Faster Boost Consumption" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
@@ -335,7 +334,7 @@ Code "Faster Boost Consumption" by "mploythai"
     var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
     if (SonicParams.pData == null) return;
 
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.boost.consumptionRate, Sonic.State.GetCurrentStateID() != Sonic.StateID.StateSpinBoost ? 100f : 50f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.boost.consumptionRate, Sonic.State.GetCurrentStateID() != Sonic.StateID.StateSpinBoost ? 100f : 25f);
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.boost.recoveryRate, 25f);
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.boost.infinityBoostTime, 120f);
   }
@@ -351,7 +350,7 @@ Code "Harder Parry" by "mploythai"
   using System.IO;
 
   static bool isLoaded = false;
-  static string directory = "";
+  static string directory;
 //
 {
   if (!isLoaded) {
