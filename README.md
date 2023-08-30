@@ -1,12 +1,12 @@
 # Refined Physics for Sonic Frontiers 🏃‍♂️
 
-I like the vanilla physics of Sonic Frontiers, but the most annoying thing about it is when I let go of RT when power boosting, and Sonic practically loses all his prior speed. The inital goal was to create a mod that addresses that singular issue, but here I am.. with yet another physics mod 🙄
+I like the vanilla physics of Sonic Frontiers, but the most annoying thing about it is when I let go of RT when power boosting, and Sonic practically loses all his prior speed. The inital goal was to create a mod that addresses that singular issue, but here I am.. with yet another physics mod.
 
-I know, I know. It's an oversaturated mod niche for this game, but the thing that's bothered me about all the other physics mods is that it deviates a bit too much from the vanilla feel. Some have Sonic's base running speed at a crazy high amount, some make it a bit way too difficult for Sonic to simply walk up a hill, and some just simply don't feel 100% to my liking. I want to change the code as minimally as possible, and focus on refining what's already good.
-
-At this early stage, I just wanna mess with the physics. However, I would like to mess with Sonic's combat and the control layout in the future.
+I know, I know. It's an oversaturated mod niche for this game, but the thing that's bothered me about all the other physics mods is that it deviates a bit too much from the vanilla feel. Some have Sonic's base running speed at a crazy high amount, some make it a bit way too difficult for Sonic to simply walk up a hill, and some just simply don't feel 100% to my liking. I want to modify the movement as minimally as possible, and focus on refining what's already good (with some extras sprinkled in).
 
 ## Changes 🔵
+
+> Players can opt-in or out of any changes I made through the configuration menu!
 
 <details>
   <summary><b>Decreased Ground Deceleration</b></summary>
@@ -26,7 +26,7 @@ At this early stage, I just wanna mess with the physics. However, I would like t
   Makes rails more momentum-based, allowing Sonic to gain/decrease speed when going up/down rails.
 
   Additionally, the minimum rail grinding speed has been decreased, and maximum rail speed is increased.
-
+  
   This does NOT remove Sonic's minimum rail speed.
 </details>
 
@@ -35,7 +35,7 @@ At this early stage, I just wanna mess with the physics. However, I would like t
 
   Makes the air boost act similar to the one in Sonic Generations.
 
-  Enable `Decreased Falling Deceleration` for a better air-boosting experience.
+  Keep `Decreased Falling Deceleration` enabled for a better air boosting experience.
 </details>
 
 <details>
@@ -85,7 +85,7 @@ At this early stage, I just wanna mess with the physics. However, I would like t
 
   Additionally, I wanted to explore how boost and spin dash can co-exist without one losing purpose due the other.
   
-  IMO: the boost should be a method to gain speed quickly, with the trade-off that Sonic remains vulnerable. The spin dash should be a method to both gain speed and attack enemies, with the trade-off that the player must charge it.
+  IMO: the boost should be a method to gain speed quickly, with the trade-off that Sonic remains vulnerable and it takes more energy. The spin dash should be a method to both gain speed and attack enemies that takes less energy, with the trade-off that the player must charge it.
   
   Credits to Proto's [Cyberspace Overhaul mod](https://gamebanana.com/mods/430615) for inspiring me to explore this boost-as-dash idea many, many months ago. LexStorm's awesome [High Speed Style mod](https://gamebanana.com/mods/464066) explores the idea as well!
 </details>
@@ -100,10 +100,11 @@ At this early stage, I just wanna mess with the physics. However, I would like t
 
 ## WIP 🔴
 
-- Retain prior forward velocity when spin charging mid-air (pls help)
+- Disable/decrease air deceleration for spin charge (pls help)
 - Cyberspace 3D physics
 - Cyberspace 2D physics
 - Water physics
+- Momentum-based free falling
 
 ## Mandatory Codes/Settings ⚙️
 
