@@ -34,5 +34,5 @@ Code "Chargable Vanilla Spin Dash" by "mploythai"
   }
 
   RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.initialSpeed, dashVelocity);
-  RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.maxSpeed, 35f);
+  RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.maxSpeed, dashVelocity);
 }
