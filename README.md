@@ -76,6 +76,8 @@ I know, I know. It's an oversaturated mod niche for this game, but the thing tha
   In the air, the longer the player holds the spin charge button, the faster the resulting spin boost will be once Sonic hits the ground.
   
   Flinging off a platform while spin boosting is now much smoother (I think).
+
+  Spin charging mid-air doesn't bring Sonic to an awkward halt! This make it the definitive way to perform a drop dash with this mod.
 </details>
 
 <details>
@@ -100,7 +102,6 @@ I know, I know. It's an oversaturated mod niche for this game, but the thing tha
 
 ## WIP 🔴
 
-- Disable/decrease air deceleration for spin charge (pls help)
 - Cyberspace 3D physics
 - Cyberspace 2D physics
 - Water physics
