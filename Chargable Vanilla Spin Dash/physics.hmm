@@ -18,7 +18,7 @@ Code "Chargable Vanilla Spin Dash" by "mploythai"
     if (Sonic.Input.IsPressed(Sonic.PlayerActionType.PlayerSonicboom))
       chargeCount += 1f;
     
-    dashVelocity = MathHelpers.Clamp(minSpeed - (30f / 7f)) + (chargeCount * (30f / 7f)), 35f, 65f);
+    dashVelocity = MathHelpers.Clamp(35f - (30f / 7f)) + (chargeCount * (30f / 7f)), 35f, 65f);
   } else if (!Sonic.IsGrounded()) {
     Sonic.Kinematics kinematics = Sonic.Kinematics.Get();
     if (kinematics == null) return;
