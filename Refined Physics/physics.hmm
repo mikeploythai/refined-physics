@@ -253,9 +253,10 @@ Code "Better Spin Boost" by "mploythai"
   #lib "SonicParameters"
   #lib "BlackboardItem"
   #lib "MathHelpers"
-   #lib "INI"
+  #lib "INI"
 
   using System.IO;
+  using System.Numerics;
 
   static float chargeCount = 0f;
   static float deceleForce = 5f;
@@ -278,16 +279,19 @@ Code "Better Spin Boost" by "mploythai"
 
     var minSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 35f : 55f;
     var maxSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 55f : 75f;
+    var addedSpeed = 20f / 7f;
 
     if (Sonic.IsGrounded() && Sonic.State.GetCurrentStateID() == Sonic.StateID.StateSpinBoostCharge) {
       if (Sonic.Input.IsPressed(Sonic.PlayerActionType.PlayerSonicboom))
         chargeCount += 1f;
       
-      dashVelocity = MathHelpers.Clamp((minSpeed - 5) + (chargeCount * 5), minSpeed, maxSpeed);
+      dashVelocity = MathHelpers.Clamp((minSpeed - addedSpeed) + (chargeCount * addedSpeed), minSpeed, maxSpeed);
     } else if (!Sonic.IsGrounded()) {
-      // potentially add forward momentum code here in the future
+      Sonic.Kinematics kinematics = Sonic.Kinematics.Get();
+      if (kinematics == null) return;
 
       if (Sonic.State.GetCurrentStateID() == Sonic.StateID.StateSpinBoostCharge) {
+        *kinematics.Velocity += Sonic.Kinematics.GetForward();
         chargeCount += 1f;
         dashVelocity = MathHelpers.Clamp(chargeCount / 1.25f, minSpeed, maxSpeed);
       }

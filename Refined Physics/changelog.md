@@ -1,3 +1,8 @@
+## Refined Physics v1.0-beta1.2
+
+- Removed air deceleration when spin charging in the air, making it the definitive drop dash for this mod
+- It now takes 8 spin charges to dash away at full speed instead of 5
+
 ## Refined Physics v1.0-beta1.1
 
 - Decreased boost gauge consumption during spin dash from 50 to 25
