@@ -1,106 +1,94 @@
-# Refined Physics for Sonic Frontiers 🏃‍♂️
+# Refined Physics for Sonic Frontiers
 
 I like the vanilla physics of Sonic Frontiers, but the most annoying thing about it is when I let go of RT when power boosting, and Sonic practically loses all his prior speed. The inital goal was to create a mod that addresses that singular issue, but here I am.. with yet another physics mod.
 
-I know, I know. It's an oversaturated mod niche for this game, but the thing that's bothered me about all the other physics mods is that it deviates a bit too much from the vanilla feel. Some have Sonic's base running speed at a crazy high amount, some make it a bit way too difficult for Sonic to simply walk up a hill, and some just simply don't feel 100% to my liking. I want to modify the movement as minimally as possible, and focus on refining what's already good (with some extras sprinkled in).
+I know, I know. It's an oversaturated mod niche for this game, but this mod is different in the way that I try my best to give you full control over what to change about the physics while keeping it simple and easy to understand.
 
-## Changes 🔵
+Every tweak in this mod can be enabled or disabled in the configuration menu, allowing you to truly refine your Frontiers experience.
 
-> Players can opt-in or out of any changes I made through the configuration menu!
+## Main Tweaks
 
-<details>
-  <summary><b>Decreased Ground Deceleration</b></summary>
-
-  Decreases Sonic's deceleration on ground, allowing him to gain speed naturally without boosting and to prevent instant momentum loss after boosting/power boosting.
-</details>
+> These are the most important tweaks, and I recommend you keep all of these on for a smoother experience in the open zone. Cyber Space support is coming soon!
 
 <details>
-  <summary><b>Decreased Falling Deceleration</b></summary>
+  <summary><b>Momentum</b></summary>
 
-  Decreases Sonic's deceleration in air, allowing him to retain his forward momentum while falling uncurled.
-</details>
+  Allows Sonic to gain, lose, and retain speed naturally.
 
-<details>
-  <summary><b>Momentum Rails</b></summary>
-
-  Makes rails more momentum-based, allowing Sonic to gain/decrease speed when going up/down rails.
-
-  Additionally, the minimum rail grinding speed has been decreased, and maximum rail speed is increased.
+  Sonic's air drag has been reduced when he's falling uncurled, allowing him to keep his forward momentum in the air better.
   
-  This does NOT remove Sonic's minimum rail speed.
+  Sonic's jump speed limit has been increased, allowing incline jumps to be easier to perform.
 </details>
 
 <details>
-  <summary><b>Generations-Styled Air Boost</b></summary>
+  <summary><b>Chargable Spin Dash & Rolling</b></summary>
 
-  Makes the air boost act similar to the one in Sonic Generations.
+  Enables spin charging to determine the spin dash speed.
 
-  Keep `Decreased Falling Deceleration` enabled for a better air boosting experience.
-</details>
-
-<details>
-  <summary><b>Brake Easing for Wall Running</b></summary>
-
-  Makes Sonic ease into a stop when letting go of the boost button while wall running.
-</details>
-
-<details>
-  <summary><b>Decreased Minimum Slide Speed</b></summary>
-
-  Decreases the minimum sliding speed.
-</details>
-
-<details>
-  <summary><b>Softer Light Speed Dash Brake</b></summary>
-
-  Prevents Sonic from coming to an instant stop after light speed dashing.
-</details>
-
-<details>
-  <summary><b>Easier Incline Jumps</b></summary>
-
-  Makes incline jumps easier.
-</details>
-
-<details>
-  <summary><b>Better Spin Boost</b></summary>
-
-  Inspired by Weezley's [Legacy Spin Dash mod](https://gamebanana.com/mods/462772)!
-
-  Spin boost is now momentum-based.
-
-  Spin boosting without charging retains Sonic's prior forward momentum, making it act like a normal roll.
+  Due to the charge requirement to dash, holding the spin dash button without charging makes the ability act like a roll in the classic games.
   
-  Spin charging on the ground determines how fast the spin boost is after releasing the charge. 5 charges = max speed.
+  Charging in the air no longer kills Sonic's prior momentum. This makes it act like a normal drop dash, and makes it the recommended way to perform it.
   
-  In the air, the longer the player holds the spin charge button, the faster the resulting spin boost will be once Sonic hits the ground.
-  
-  Flinging off a platform while spin boosting is now much smoother (I think).
-
-  Spin charging mid-air doesn't bring Sonic to an awkward halt! This make it the definitive way to perform a drop dash with this mod.
+  If momentum is enabled, the spin dash will be momentum-based and the max speed will depend on if power boost is active. Else, it'll act like the vanilla spin dash, but with charging taken into account.
 </details>
 
 <details>
-  <summary><b>Faster Boost Consumption</b></summary>
+  <summary><b>Balanced Boost Gauge Drain</b></summary>
 
-  Since Sonic can retain his momentum better in Refined Physics, there's no need for him to boost for a long time.
+ Re-balances the boost to account for Sonic's ability to retain speed very well.
+  
+  The boost lasts much shorter, making it act more like a dash ability. The spin dash, however, lasts much longer.
+  
+  Infinite boost now lasts for 2 minutes instead of 3. It's recommended to activate infinite boost when facing SQUID.
+</details>
 
-  Additionally, I wanted to explore how boost and spin dash can co-exist without one losing purpose due the other.
-  
-  IMO: the boost should be a method to gain speed quickly, with the trade-off that Sonic remains vulnerable and it takes more energy. The spin dash should be a method to both gain speed and attack enemies that takes less energy, with the trade-off that the player must charge it.
-  
-  Credits to Proto's [Cyberspace Overhaul mod](https://gamebanana.com/mods/430615) for inspiring me to explore this boost-as-dash idea many, many months ago. LexStorm's awesome [High Speed Style mod](https://gamebanana.com/mods/464066) explores the idea as well!
+<details>
+  <summary><b>Soft Ring Dash Brake</b></summary>
+
+  Prevents Sonic from coming to a halt after ring dashing.
+</details>
+
+<details>
+  <summary><b>Rail Momentum</b></summary>
+
+  Decreases rail deceleration, allowing Sonic to gain, lose, and retain speed naturally while grinding.
+
+  Sonic still has a minimum grinding speed, but it has been reduced.
+</details>
+
+## Optional Tweaks
+
+> These are more quality-of-life oriented, and are off by default. I recommend enabling all of them, but they don't take too much away from the experience if not.
+
+<details>
+  <summary><b>Faster Base Running Speed</b></summary>
+
+  Makes running without boost less painful.
 </details>
 
 <details>
   <summary><b>Harder Parry</b></summary>
 
-  Not really physics-related, but I added it anyway lmao
+  The parry now lasts 0.3s instead of 15s, incentivizing players to time their parries well.
 
-  Makes the parry last 0.3s instead of 15s.
+  The length is subject to change; I haven't tested this in boss fights yet.
 </details>
 
-## WIP 🔴
+<details>
+  <summary><b>Decreased Minimum Sliding Speed</b></summary>
+
+  Decreases the minimum speed for sliding.
+  
+  I don't like the random speed-up from sliding, so this fixes it.
+</details>
+
+<details>
+  <summary><b>Soft Wall Running Brake</b></summary>
+
+  Prevents Sonic from coming to an instant stop when letting go of the boost button while wall running.
+</details>
+
+## WIP
 
 - Cyberspace 3D physics
 - Cyberspace 2D physics
