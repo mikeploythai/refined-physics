@@ -1,3 +1,7 @@
+## Refined Physics v1.0-beta1.3.1
+
+- Fixed default configuration; optional tweaks were mistakenly on by default.
+
 ## Refined Physics v1.0-beta1.3
 
 - Updates will only come from the server following this update. When updates arrive, please press the refresh icon next to the mod name in HMM to recieve the prompt to download it!
