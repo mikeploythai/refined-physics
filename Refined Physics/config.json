@@ -20,7 +20,7 @@
           "DisplayName": "Chargable Spin Dash",
           "Description": [
             "RECOMMENDED: Enable the 'Disable Drop Dash' code in HMM.\n",
-            "Enables spin charging to determine the spin dash speed.\n",
+            "Enables spin charging to determine the spin dash speed. 5 charges = max dash speed.\n",
             "Due to the charge requirement to dash, holding the spin dash button without charging makes the ability act like a roll in the classic games.\n",
             "Charging in the air no longer kills Sonic's prior momentum. This makes it act like a normal drop dash, and makes it the recommended way to perform it.\n",
             "If momentum is enabled, the spin dash will be momentum-based and the max speed will depend on if power boost is active.\n",
@@ -123,9 +123,8 @@
           "Name": "slamDemand",
           "DisplayName": "Grand Slam On Demand",
           "Description": [
-            "Activate Grand Slam after a homing attack and 3 combo attacks by pressing Y and B together.\n",
-            "Heavily experimental; this is my intro into combat modding lmao. Kinda hard to pull off because of how Y and B are mapped to quick cyloop and stomp respectively, and I don't know how to add a buffer for button inputs.\n",
-            "If anyone knows anything about button remapping, adding input buffering, or anything related to combat modding, pls reach out in DMs."
+            "Activate Grand Slam after a homing attack, a melee attack, or a quick cyloop by pressing Y and B together.\n",
+            "Heavily experimental. If anyone knows anything about button remapping or anything related to combat modding, pls reach out in DMs!"
           ],
           "Type": "bool",
           "DefaultValue": false

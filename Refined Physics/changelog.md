@@ -1,3 +1,8 @@
+## Refined Physics v1.0-beta1.3.2
+
+- Reverted spin charge requirement from 8 to 5 for full speed.
+- (EXPERIMENTAL) Activating grand slam in combat should be more reliable. Sonic can now perform the action after a single homing attack, melee attack, or quick cyloop. Turn on the code in the experimental section to try it out!
+
 ## Refined Physics v1.0-beta1.3.1
 
 - Fixed default configuration; optional tweaks were mistakenly on by default.
