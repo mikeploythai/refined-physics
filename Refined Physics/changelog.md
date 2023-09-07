@@ -1,3 +1,16 @@
+## Refined Physics v1.0-beta1.3
+
+- Updates will only come from the server following this update. When updates arrive, please press the refresh icon next to the mod name in HMM to recieve the prompt to download it!
+- Completely overhauled the configuration UI. There are now 3 sections: main tweaks, optional tweaks, and experimental tweaks. Main tweaks refer to the most important tweaks that impact gameplay heavily, optional tweaks are more quality-of-life related, but recommended to turn on, and experimental tweaks are things that I DO NOT recommend activating; they're there for me to remember what I wrote lol.
+- Cleaned up the code
+- Decreased Ground Deceleration, Decreased Falling Deceleration, and Easier Incline Jumps have been merged into one code called Momentum. This was done for the sake of simplifying the UX and making things easier to understand for the player.
+- Added the option to have a faster base running speed. If Momentum is enabled, the boost will be faster too!
+- (EXPERIMENTAL) Added the option for activating Grand Slam through a combo. Perform a homing attack, 3 combo attacks, and press Y and B at the same time. This is HEAVILY experimental, and my first foray into combat-related tweaking. It also doesn't work sometimes due to how Y and B are mapped to Quick Cyloop and Stomp respectively.
+- Replaced Generations-Styled air boost with the Cyber Space air boost. Might be a controversial change, but I really like Cyber Space's air boost; it's the only good thing about Cyber Space.
+- Enabling the Momentum code is now required if you want the Chargable Spin Dash to be momentum-based. Otherwise, the Chargable Spin Dash will work just like my other mod of the same name.
+- Adjusted ground deceleration value to let Sonic retain running momentum better
+- The Momentum code enables smoother running animation transitions
+
 ## Refined Physics v1.0-beta1.2
 
 - Removed air deceleration when spin charging in the air, making it the definitive drop dash for this mod
