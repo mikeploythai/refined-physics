@@ -1,3 +1,10 @@
+## Refined Physics v1.0-beta1.3.3
+
+- NOTICE: Final update until update 3. I've been hearing lots of things about this update; I decided it's best I wait it out. In the mean time, I'll be working on a combat mod! Stay tuned.
+- Lowered deceleration force for spin dash
+- Lowered deceleration force for rail grinding
+- Re-balanced air boost; air boost speed is faster if power boost is on
+
 ## Refined Physics v1.0-beta1.3.2
 
 - Reverted spin charge requirement from 8 to 5 for full speed.
