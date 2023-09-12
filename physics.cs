@@ -57,7 +57,6 @@ Code "Chargable Spin Dash" by "cali_burrito"
 //
   #include "ReflectionHelpers" noemit
 
-  #lib "Sonic"
   #lib "SonicParameters"
   #lib "BlackboardItem"
   #lib "MathHelpers"
@@ -68,7 +67,8 @@ Code "Chargable Spin Dash" by "cali_burrito"
   static float chargeCount = 0f;
   static float minDashSpeed = 35f;
   static float maxDashSpeed = 65f;
-  static float addedDashSpeed = 30f / 7f;
+  static float addedDashSpeed = 15f / 2f;
+  static float decele = 4f;
   static bool isLoaded = false;
   static string directory;
 //
@@ -91,7 +91,7 @@ Code "Chargable Spin Dash" by "cali_burrito"
 
     if (isMomentumEnabled) {
       maxDashSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 55f : 75f;
-      addedDashSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 20f / 7f : 40f / 7f;
+      addedDashSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 5f : 10f;
     }
 
     if (Sonic.IsGrounded() && Sonic.State.GetCurrentStateID() == Sonic.StateID.StateSpinBoostCharge) {
@@ -106,7 +106,7 @@ Code "Chargable Spin Dash" by "cali_burrito"
       if (Sonic.State.GetCurrentStateID() == Sonic.StateID.StateSpinBoostCharge) {
         *kinematics.Velocity += Sonic.Kinematics.GetForward();
         chargeCount += 1f;
-        dashVelocity = MathHelpers.Clamp(chargeCount / 1.15f, minDashSpeed, maxDashSpeed);
+        dashVelocity = MathHelpers.Clamp(chargeCount / 1.125f, minDashSpeed, maxDashSpeed);
       }
     } else if (Sonic.State.GetPreviousStateID() != Sonic.StateID.StateSpinBoostCharge && Sonic.State.GetCurrentStateID() != Sonic.StateID.StateSpinBoost) {
       chargeCount = 0f;
@@ -118,8 +118,8 @@ Code "Chargable Spin Dash" by "cali_burrito"
     RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.initialSpeed, dashVelocity);
     RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.maxSpeed, maxSpeed);
     RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.minTurnSpeed, 30f);
-    RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.decele.force, 5f);
-    RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.decele.force2, 5f);
+    RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.decele.force, decele);
+    RFL_SET_PARAM(SonicParams, forwardView.spinBoost.speedBoost.decele.force2, decele);
     RFL_SET_PARAM(SonicParams, forwardView.spinBoost.deceleNeutralMin.force, 750f);
     RFL_SET_PARAM(SonicParams, forwardView.spinBoost.deceleNeutralMax.force, 1000f);
     RFL_SET_PARAM(SonicParams, forwardView.spinBoost.gravitySize, 70f);
@@ -162,6 +162,7 @@ Code "Cyber Space Air Boost" by "cali_burrito"
   #include "ReflectionHelpers" noemit
 
   #lib "SonicParameters"
+  #lib "BlackboardItem"
   #lib "INI"
 
   using System.IO;
@@ -182,10 +183,13 @@ Code "Cyber Space Air Boost" by "cali_burrito"
     var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
     if (SonicParams.pData == null) return;
 
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.startHSpeed, 40f);
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.startHSpeedMax, 80f);
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.minHSpeed, 30f);
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.minHSpeedMax, 60f);
+    float startHSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 30f : 40f;
+    float minHSpeed = BlackboardItem.GetRingCount() != SonicParams.pData->forwardView.modePackage.common.capacityRings ? 20f : 30f;
+
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.startHSpeed, startHSpeed);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.startHSpeedMax, startHSpeed * 2f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.minHSpeed, minHSpeed);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.minHSpeedMax, minHSpeed * 2f);
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.minKeepTime, 0.05f);
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.maxKeepTime, 0.1f);
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.maxTime, 0f);
@@ -219,7 +223,7 @@ Code "Rail Momentum" by "cali_burrito"
     var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
     if (SonicParams.pData == null) return;
 
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.grind.deceleForce, 5f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.grind.deceleForce, 4f);
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.grind.limitSpeedMin, 10f);
   }
 }
@@ -351,7 +355,7 @@ Code "Grand Slam On Demand" by "cali_burrito"
 
   using System.IO;
 
-  static int comboCounter = 0;
+  static bool isEnemyAttacked = false;
   static bool isLoaded = false;
   static string directory;
 //
@@ -368,13 +372,23 @@ Code "Grand Slam On Demand" by "cali_burrito"
     var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
     if (SonicParams.pData == null) return;
 
-    if (Sonic.State.GetCurrentStateID() == Sonic.StateID.StateComboStep)
-      comboCounter += 1;
+    Sonic.StateID[] attackStates = {
+      Sonic.StateID.StateHomingFinished,
+      Sonic.StateID.StateComboStep,
+      Sonic.StateID.StateQuickCyloop,
+    }
 
-    if (comboCounter == 4 && Sonic.Input.IsDown(Sonic.PlayerActionType.PlayerCyloop) && Sonic.Input.IsDown(Sonic.PlayerActionType.PlayerStomping))
+    bool isInputPressed = Sonic.Input.IsDown(Sonic.PlayerActionType.PlayerCyloop) && Sonic.Input.IsDown(Sonic.PlayerActionType.PlayerStomping);
+    
+    for (int i = 0; i != attackStates.Length; i++) {
+      if (Sonic.State.GetPreviousStateID() == attackStates[i])
+        isEnemyAttacked = true;
+    }
+
+    if (isEnemyAttacked && isInputPressed)
       Sonic.State.SetState(Sonic.StateID.StateSmash);
 
-    if (comboCounter > 4 || Sonic.State.GetPreviousStateID() == Sonic.StateID.StateSmash)
-      comboCounter = 0;
+    if (Sonic.State.GetPreviousStateID() == Sonic.StateID.StateSmash)
+      isEnemyAttacked = false;
   }
 }
