@@ -1,3 +1,8 @@
+## Refined Physics v1.0.1
+
+- Added `MathHelpers` library (I forgot lol)
+- Rebalanced spin dash gravity tweak
+
 ## Refined Physics v1.0
 
 - First official release!
