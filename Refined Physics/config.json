@@ -1,62 +1,16 @@
 {
   "Groups": [
     {
-      "Name": "mainTweaks",
-      "DisplayName": "Main Tweaks",
+      "Name": "global",
+      "DisplayName": "Sonic - Universal Tweaks",
       "Elements": [
         {
           "Name": "momentum",
-          "DisplayName": "Momentum",
+          "DisplayName": "Running Momentum",
           "Description": [
-            "Allows Sonic to gain, lose, and retain speed naturally.\n",
-            "Sonic's air drag has been reduced when he's falling uncurled, allowing him to keep his forward momentum in the air better.\n",
-            "Sonic's jump speed limit has been increased, allowing incline jumps to be easier to perform."
-          ],
-          "Type": "bool",
-          "DefaultValue": true
-        },
-        {
-          "Name": "chargableSpinDash",
-          "DisplayName": "Chargable Spin Dash",
-          "Description": [
-            "RECOMMENDED: Enable the 'Disable Drop Dash' code in HMM.\n",
-            "Enables spin charging to determine the spin dash speed. 5 charges = max dash speed.\n",
-            "Due to the charge requirement to dash, holding the spin dash button without charging makes the ability act like a roll in the classic games.\n",
-            "Charging in the air no longer kills Sonic's prior momentum. This makes it act like a normal drop dash, and makes it the recommended way to perform it.\n",
-            "If momentum is enabled, the spin dash will be momentum-based and the max speed will depend on if power boost is active.\n",
-            "Else, it'll act like the vanilla spin dash, but with charging taken into account."
-          ],
-          "Type": "bool",
-          "DefaultValue": true
-        },
-        {
-          "Name": "balancedDrain",
-          "DisplayName": "Balanced Boost Gauge Drain",
-          "Description": [
-            "RECOMMENDED: Use if momentum is enabled.\n",
-            "Re-balances the boost to account for Sonic's ability to retain speed very well.\n",
-            "The boost lasts much shorter, making it act more like a dash ability. The spin dash, however, lasts much longer.\n",
-            "Infinite boost now lasts for 2 minutes instead of 3. It's recommended to activate infinite boost when facing SQUID."
-          ],
-          "Type": "bool",
-          "DefaultValue": true
-        },
-        {
-          "Name": "csAirBoost",
-          "DisplayName": "Cyber Space Air Boost",
-          "Description": [
-            "Enables Cyber Space air boost physics (the only good thing about those physics IMO).\n",
-            "This air boost is momentum-based in a way? The faster Sonic was before air boosting, the longer the air boost lasts.\n",
-            "Additionally, Sonic doesn't descend while air boosting, so it sorta mimicks Unleashed's air boost."
-          ],
-          "Type": "bool",
-          "DefaultValue": true
-        },
-        {
-          "Name": "softRingDash",
-          "DisplayName": "Soft Ring Dash Brake",
-          "Description": [
-            "Prevents Sonic from coming to a halt after ring dashing."
+            "Allows Sonic to gain, lose, and retain speed while running naturally.\n",
+            "Sonic's jump speed limit has been increased, allowing incline jumps to be easier to perform.\n",
+            "Conflicts with 'Retain Velocity When Jumping Up Slopes' HMM code."
           ],
           "Type": "bool",
           "DefaultValue": true
@@ -65,8 +19,98 @@
           "Name": "railMomentum",
           "DisplayName": "Rail Momentum",
           "Description": [
-            "Decreases rail deceleration, allowing Sonic to gain, lose, and retain speed naturally while grinding.\n",
+            "Allows Sonic to gain, lose, and retain speed while rail grinding naturally.\n",
             "Sonic still has a minimum grinding speed, but it has been reduced."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "chargableSpinDash",
+          "DisplayName": "Chargable Spin Dash & Rolling",
+          "Description": [
+            "Enables spin charging to determine the spin dash speed. 5 charges = max dash speed.\n",
+            "Due to the charge requirement to dash, holding the spin dash button without charging makes the ability act like a roll in the classic games.\n",
+            "If momentum is enabled, the spin dash will be momentum-based."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "noSpinChargeDecele",
+          "DisplayName": "Disable Air Spin Charge Deceleration",
+          "Description": [
+            "Prevents Sonic from coming to a halt when charging a spin dash in the air.\n",
+            "This makes it act like a normal drop dash, and makes it the recommended way to perform it.\n",
+            "It's recommended to enable the 'Disable Drop Dash' HMM code.\n",
+            "Conflicts with 'Disable Spin Charge Air Deceleration' HMM code."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "modifiedDashGravity",
+          "DisplayName": "Modified Spin Dash Gravity",
+          "Description": [
+            "Modifies the spin dash gravity to stop Sonic from staying in the air for too long, making it less overpowered."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "balancedBoost",
+          "DisplayName": "Balanced Boost Gauge",
+          "Description": [
+            "Re-balances the boost to account for Sonic's ability to retain speed very well.\n",
+            "The boost lasts much shorter, making it act more like a dash ability. The spin dash, however, lasts much longer.\n",
+            "Infinite boost now lasts for 2 minutes instead of 3. It's recommended to activate infinite boost when facing SQUID.\n",
+            "It's recommended to enable this if the 'Running Momentum' tweak is enabled."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "disableSpinMove",
+          "DisplayName": "Disable Spin Move",
+          "Description": ["Disables the Lost World ground rolling thing."],
+          "Type": "bool",
+          "DefaultValue": true
+        }
+      ]
+    },
+    {
+      "Name": "openZone",
+      "DisplayName": "Sonic - Open Zone Specific Tweaks",
+      "Elements": [
+        {
+          "Name": "fasterRunning",
+          "DisplayName": "Faster Base Running Speed",
+          "Description": ["Makes running without boost less painful."],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "cyberAirBoost",
+          "DisplayName": "Cyber Space Air Boost",
+          "Description": [
+            "Enables Cyber Space air boost physics (the only good thing about those physics IMO).\n",
+            "This air boost is momentum-based in a way? The faster Sonic was before air boosting, the longer the air boost lasts.\n"
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "fixedSlide",
+          "DisplayName": "Fixed Slide Speed",
+          "Description": ["Decreases the minimum speed for sliding."],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "wallRunEase",
+          "DisplayName": "Softer Wall Running Brake",
+          "Description": [
+            "Prevents Sonic from coming to an instant stop when letting go of the boost button while wall running."
           ],
           "Type": "bool",
           "DefaultValue": true
@@ -74,60 +118,37 @@
       ]
     },
     {
-      "Name": "optionalTweaks",
-      "DisplayName": "Optional Tweaks",
+      "Name": "cyber",
+      "DisplayName": "3D Cyber Space Specific Tweaks",
       "Elements": [
         {
-          "Name": "fasterRunning",
-          "DisplayName": "Faster Base Running Speed",
-          "Description": ["Makes running without boost less painful."],
-          "Type": "bool",
-          "DefaultValue": false
-        },
-        {
-          "Name": "harderParry",
-          "DisplayName": "Harder Parry",
+          "Name": "slowStart",
+          "DisplayName": "Gradual Walk-Run Cycle",
           "Description": [
-            "The parry now lasts 0.3s instead of 15s, incentivizing players to time their parries well.\n",
-            "The length is subject to change; I haven't tested this in boss fights yet."
+            "Starts Sonic off at a lower speed that builds up smoothly to a run."
           ],
           "Type": "bool",
-          "DefaultValue": false
+          "DefaultValue": true
         },
         {
-          "Name": "minSlide",
-          "DisplayName": "Decreased Minimum Slide Speed",
-          "Description": [
-            "Decreases the minimum speed for sliding.\n",
-            "I don't like the random speed-up from sliding, so this fixes it."
-          ],
+          "Name": "openZoneRotation",
+          "DisplayName": "Open Zone Rotation",
+          "Description": ["Enables open zone rotation movement."],
           "Type": "bool",
-          "DefaultValue": false
-        },
-        {
-          "Name": "softWallBrake",
-          "DisplayName": "Soft Wall Running Brake",
-          "Description": [
-            "Prevents Sonic from coming to an instant stop when letting go of the boost button while wall running.\n"
-          ],
-          "Type": "bool",
-          "DefaultValue": false
+          "DefaultValue": true
         }
       ]
     },
     {
-      "Name": "experimentalTweaks",
-      "DisplayName": "Experimental Tweaks",
+      "Name": "cyberSV",
+      "DisplayName": "2D Cyber Space Specific Tweaks",
       "Elements": [
         {
-          "Name": "slamDemand",
-          "DisplayName": "Grand Slam On Demand",
-          "Description": [
-            "Activate Grand Slam after a homing attack, a melee attack, or a quick cyloop by pressing Y and B together.\n",
-            "Heavily experimental. If anyone knows anything about button remapping or anything related to combat modding, pls reach out in DMs!"
-          ],
+          "Name": "fasterBoost",
+          "DisplayName": "Faster Boost",
+          "Description": ["Increases the boost speed."],
           "Type": "bool",
-          "DefaultValue": false
+          "DefaultValue": true
         }
       ]
     }

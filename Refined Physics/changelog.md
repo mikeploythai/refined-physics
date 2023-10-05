@@ -1,3 +1,11 @@
+## Refined Physics v1.0
+
+- First official release!
+- Refactored codebase to support the Final Horizon update
+- Added tweaks for Cyber Space
+- New config categories due to refactor
+- Removed differences for air boost and spin dash if power boost is active, might re-introduce later??
+
 ## Refined Physics v1.0-beta1.3.3
 
 - NOTICE: Final update until update 3. I've been hearing lots of things about this update; I decided it's best I wait it out. In the mean time, I'll be working on a combat mod! Stay tuned.
