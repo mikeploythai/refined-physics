@@ -7,6 +7,7 @@ Code "Sonic - Universal Changes" by "cali_burrito"
   #lib "Reflection"
   #lib "SonicParameters"
   #lib "Player"
+  #lib "MathHelpers"
   #lib "INI"
 
   using System.IO;
@@ -30,6 +31,9 @@ Code "Sonic - Universal Changes" by "cali_burrito"
   bool isBalancedBoostEnabled = bool.Parse(config["global"]["balancedBoost"]);
   bool isDisableSpinMoveEnabled = bool.Parse(config["global"]["disableSpinMove"]);
 
+  // One day: make this dynamic
+  // - Enable spin move only if previous state was spin dash
+  // - Create timer to limit how long Sonic can stay in spin move state
   if (isDisableSpinMoveEnabled)
     Player.State.Redirect<Sonic.StateID>(Sonic.StateID.StateSpinMove, Sonic.StateID.StateStand);
   
@@ -83,7 +87,7 @@ Code "Sonic - Universal Changes" by "cali_burrito"
 
   if (isModifiedDashGravityEnabled) {
     RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.gravitySize, 70f);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.gravitySizeMinInAir, 40f);
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.gravitySizeMinInAir, 35f);
   }
 }
 
