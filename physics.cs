@@ -1,6 +1,6 @@
 // Main purpose of this document is to get C# to show up in the languages section lol
 
-Code "Sonic - Universal Changes" by "cali_burrito"
+Code "Sonic - Global Changes" by "cali_burrito"
 //
   #include "Reflection" noemit
 
@@ -23,71 +23,87 @@ Code "Sonic - Universal Changes" by "cali_burrito"
   }
 
   var config = INI.Read(Path.Combine(directory, "config.ini"));
-  bool isMomentumEnabled = bool.Parse(config["global"]["momentum"]);
-  bool isRailMomentumEnabled = bool.Parse(config["global"]["railMomentum"]);
   bool isChargableSpinDashEnabled = bool.Parse(config["global"]["chargableSpinDash"]);
   bool isNoSpinChargeDeceleEnabled = bool.Parse(config["global"]["noSpinChargeDecele"]);
-  bool isModifiedDashGravityEnabled = bool.Parse(config["global"]["modifiedDashGravity"]);
-  bool isBalancedBoostEnabled = bool.Parse(config["global"]["balancedBoost"]);
-  bool isDisableSpinMoveEnabled = bool.Parse(config["global"]["disableSpinMove"]);
-
-  // One day: make this dynamic
-  // - Enable spin move only if previous state was spin dash
-  // - Create timer to limit how long Sonic can stay in spin move state
-  if (isDisableSpinMoveEnabled)
-    Player.State.Redirect<Sonic.StateID>(Sonic.StateID.StateSpinMove, Sonic.StateID.StateStand);
-  
-  if (isNoSpinChargeDeceleEnabled) {
-    var kinematics = Player.Kinematics.Get();
-    if (kinematics == null) return;
-
-    if (!Player.Status.IsGrounded() && Player.Input.IsDown(Player.InputActionType.PlayerSonicboom) && Player.State.GetCurrentStateID<Sonic.StateID>() == Sonic.StateID.StateSpinBoostCharge)
-      kinematics->Velocity += Player.Kinematics.GetForward();
-  }
+  int momentumVal = int.Parse(config["global"]["momentum"]);
 
   var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
   if (SonicParams.pData == null) return;
 
-  if (isMomentumEnabled) {
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.speed.decele.force, 4f);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.speed.decele.force2, 4f);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.jumpSpeed.limitUpSpeed, 30f);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.speedBoost.decele.force, 4f);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.speedBoost.decele.force2, 4f);
+  // Ground Momentum
+  if (momentumVal != 0) {
+    float force = 10f;
+
+    if (momentumVal == 2 || momentumVal == 3) force = 4f;
+
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.speed.decele.force, force);
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.speed.decele.force2, force);
   }
 
-  if (isRailMomentumEnabled) {
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.grind.acceleForce, 5f);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.grind.deceleForce, 4f);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.grind.limitSpeedMin, 8f);
+  // Rail Momentum
+  if (momentumVal != 0) {
+    float force = 10f;
+    float minRailSpeed = Player.Status.IsSideView() ? 6f : 8f;
+
+    if (momentumVal == 2 || momentumVal == 2) force = 4f;
+
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.grind.deceleForce, force);
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.grind.limitSpeedMin, minRailSpeed);
   }
 
+  // Chargable Spin Dash
   if (isChargableSpinDashEnabled) {
     float dashVelocity = Player.Kinematics.GetHorizontalMagnitude();
-    float minSpeed = Player.Status.IsSideView() ? 25f : 35f;
-    float maxSpeed = Player.Status.IsSideView() ? 55f : 65f;
+    float minSpeed = Player.Status.IsSideView() ? 30f : 40f;
+    float maxSpeed = Player.Status.IsSideView() ? 50f : 70f;
 
     if (Player.Status.IsGrounded() && Player.State.GetCurrentStateID<Sonic.StateID>() == Sonic.StateID.StateSpinBoostCharge) {
-      if (Player.Input.IsPressed(Player.InputActionType.PlayerSonicboom)) chargeCount += 1f;
+      if (Player.Input.IsPressed(Player.InputActionType.PlayerSonicboom))
+        chargeCount += 1f;
+
+      chargeCount += 0.075f;
       dashVelocity = MathHelpers.Clamp((minSpeed - 7.5f) + (chargeCount * 7.5f), minSpeed, maxSpeed);
     } else if (!Player.Status.IsGrounded() && Player.State.GetCurrentStateID<Sonic.StateID>() == Sonic.StateID.StateSpinBoostCharge) {
-      chargeCount += 1f / 1.125f;
+      // Get out of charge state if LT is let go
+      if (Player.Input.IsReleased(Player.InputActionType.PlayerSonicboom))
+        Player.State.SetState<Sonic.StateID>(Sonic.StateID.StateFall);
+
+      chargeCount += 1f;
       dashVelocity = MathHelpers.Clamp(chargeCount, minSpeed, maxSpeed);
-    } else if (Player.State.GetPreviousStateID<Sonic.StateID>() != Sonic.StateID.StateSpinBoostCharge && Player.State.GetCurrentStateID<Sonic.StateID>() != Sonic.StateID.StateSpinBoost) {
+    } else {
       chargeCount = 0f;
       dashVelocity = Player.Kinematics.GetHorizontalMagnitude();
     }
 
     RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.speedBoost.initialSpeed, dashVelocity);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.speedBoost.maxSpeed, isMomentumEnabled ? 3f : Player.Kinematics.GetHorizontalMagnitude());
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.speedBoost.maxSpeed, momentumVal == 0 ? Player.Kinematics.GetHorizontalMagnitude() : 3f);
   }
 
-  if (isBalancedBoostEnabled)
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.boost.consumptionRate, Player.State.GetCurrentStateID<Sonic.StateID>() != Sonic.StateID.StateSpinBoost ? 100f : 20f);
+  // Spin Dash Momentum
+  if (isChargableSpinDashEnabled && momentumVal != 0) {
+    float force = 10f;
 
-  if (isModifiedDashGravityEnabled) {
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.gravitySize, 70f);
-    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.gravitySizeMinInAir, 35f);
+    if (momentumVal == 2 || momentumVal == 3)
+      force = 4f;
+
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.speedBoost.decele.force, force);
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, spinBoost.speedBoost.decele.force2, force);
+  }
+
+  // Disable Spin Charge Air Deceleration
+  if (isNoSpinChargeDeceleEnabled) {
+    var kinematics = Player.Kinematics.Get();
+    if (kinematics == null) return;
+
+    if (!Player.Status.IsGrounded() && Player.Input.IsDown(Player.InputActionType.PlayerSonicboom) && Player.State.GetCurrentStateID<Sonic.StateID>() == Sonic.StateID.StateSpinBoostCharge) {
+      kinematics->Velocity += Player.Kinematics.GetForward();
+    }
+  }
+
+  // Balanced Boost
+  if (momentumVal == 2) {
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.boost.recoveryRate, 20f);
+    RFL_SET_CONTEXTUAL_PLAYER_PARAM(SonicParams, modePackage.boost.consumptionRate, Player.State.GetCurrentStateID<Sonic.StateID>() != Sonic.StateID.StateSpinBoost ? 100f : 20f);
   }
 }
 
@@ -112,15 +128,16 @@ Code "Sonic - Open Zone Changes" by "cali_burrito"
 
   var config = INI.Read(Path.Combine(directory, "config.ini"));
   bool isFasterRunningEnabled = bool.Parse(config["openZone"]["fasterRunning"]);
-  bool isCyberAirBoostEnabled = bool.Parse(config["openZone"]["cyberAirBoost"]);
   bool isFixedSlideEnabled = bool.Parse(config["openZone"]["fixedSlide"]);
   bool isWallRunEaseEnabled = bool.Parse(config["openZone"]["wallRunEase"]);
-  bool isMomentumEnabled = bool.Parse(config["global"]["momentum"]);
-  bool isBalancedBoostEnabled = bool.Parse(config["global"]["balancedBoost"]);
+  bool isCyberAirBoostEnabled = bool.Parse(config["openZone"]["cyberAirBoost"]);
+  bool isConsistentParryEnabled = bool.Parse(config["openZone"]["consistentParry"]);
+  int momentumVal = int.Parse(config["global"]["momentum"]);
 
   var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
   if (SonicParams.pData == null) return;
 
+  // Faster Speed
   if (isFasterRunningEnabled) {
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.speed.normal.max, 20f);
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.speed.normal2.max, 20f);
@@ -132,6 +149,19 @@ Code "Sonic - Open Zone Changes" by "cali_burrito"
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.speed.boost2.max, 40f);
   }
 
+  // Modified Air Drag
+  if (momentumVal != 0)
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.fall.overSpeedDeceleForce, 0f);
+
+  // Fixed Sliding Speed
+  if (isFixedSlideEnabled)
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.sliding.minSpeed, 8f);
+
+  // Softer Wall Run Ease
+  if (isWallRunEaseEnabled)
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.wallmove.brake, 20f);
+
+  // Cyber Space Air Boost
   if (isCyberAirBoostEnabled) {
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.startHSpeed, 40f);
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.startHSpeedMax, 80f);
@@ -144,22 +174,26 @@ Code "Sonic - Open Zone Changes" by "cali_burrito"
     RFL_SET_PARAM(SonicParams, forwardView.modePackage.airboost.additionalTransitTime, 0.3f);
   }
 
-  if (isFixedSlideEnabled)
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.sliding.minSpeed, 8f);
-  
-  if (isWallRunEaseEnabled)
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.wallmove.brake, 20f);
-  
-  if (isMomentumEnabled)
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.fall.overSpeedDeceleForce, 0f);
-  
-  if (isBalancedBoostEnabled) {
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.boost.recoveryRate, 20f);
-    RFL_SET_PARAM(SonicParams, forwardView.modePackage.boost.infinityBoostTime, 120f);
+  // Consistent Parry Timing
+  if (isConsistentParryEnabled) {
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.maxRecieveTimes[0], 2f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.maxRecieveTimes[1], 1.5f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.maxRecieveTimes[2], 1f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.maxRecieveTimes[3], 0.5f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.justRecieveTimes[0], 2f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.justRecieveTimes[1], 1.5f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.justRecieveTimes[2], 1f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.justRecieveTimes[3], 0.5f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.justEffectTime, 1f);
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.parry.justEffectTime3, 1f);
   }
+
+  // Balanced Boost
+  if (momentumVal == 2)
+    RFL_SET_PARAM(SonicParams, forwardView.modePackage.boost.infinityBoostTime, 120f);
 }
 
-Code "Cyber Space Changes" by "cali_burrito"
+Code "Sonic - Cyber Space Changes" by "cali_burrito"
 //
   #include "Reflection" noemit
 
@@ -180,27 +214,38 @@ Code "Cyber Space Changes" by "cali_burrito"
 
   var config = INI.Read(Path.Combine(directory, "config.ini"));
   bool isSlowStartEnabled = bool.Parse(config["cyber"]["slowStart"]);
-  bool isOpenZoneRotationEnabled = bool.Parse(config["cyber"]["openZoneRotation"]);
-  bool isMomentumEnabled = bool.Parse(config["global"]["momentum"]);
+  bool isOpenRotationEnabled = bool.Parse(config["cyber"]["openRotation"]);
+  int momentumVal = int.Parse(config["global"]["momentum"]);
 
   var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
   if (SonicParams.pData == null) return;
 
+  // Lower Min Speed
   if (isSlowStartEnabled) {
     RFL_SET_PARAM(SonicParams, cyberspace.modePackage.speed.normal.initial, 5f);
     RFL_SET_PARAM(SonicParams, cyberspace.modePackage.speed.normal2.initial, 5f);
   }
 
-  if (isOpenZoneRotationEnabled) {
+  // Ground Momentum
+  if (momentumVal != 0)
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.speed.maxGravityAccele, 10f);
+
+  // Open Zone Rotation
+  if (isOpenRotationEnabled) {
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.baseRotateForce, 500f);
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.baseRotateForce2, 3500f);
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.baseRotateForceSpeed, 15f);
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.minRotateForce, 60f);
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.maxRotateForce, 1000f);
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.angleRotateForceDecayEnabled, true);
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.frontRotateRatio, 0.2f);
+    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.rotationForceDecaySpeed, 30f);
     RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.rotationForceDecayRate, 0f);
     RFL_SET_PARAM(SonicParams, cyberspace.modePackage.rotation.rotationForceDecayMax, 0f);
   }
-
-  if (isMomentumEnabled)
-    RFL_SET_PARAM(SonicParams, cyberspace.modePackage.speed.maxGravityAccele, 10f);
 }
 
-Code "Cyber Space 2D Changes" by "cali_burrito"
+Code "Sonic - Cyber Space 2D Changes" by "cali_burrito"
 //
   #include "Reflection" noemit
 
@@ -221,11 +266,12 @@ Code "Cyber Space 2D Changes" by "cali_burrito"
 
   var config = INI.Read(Path.Combine(directory, "config.ini"));
   bool isFasterBoostEnabled = bool.Parse(config["cyberSV"]["fasterBoost"]);
-  bool isMomentumEnabled = bool.Parse(config["global"]["momentum"]);
+  int momentumVal = int.Parse(config["global"]["momentum"]);
 
   var SonicParams = Reflection.GetDataInfo<SonicParameters.Root>("player_common");
   if (SonicParams.pData == null) return;
 
+  // Faster Boost
   if (isFasterBoostEnabled) {
     RFL_SET_PARAM(SonicParams, cyberspaceSV.modePackage.speed.boost.initial, 30f);
     RFL_SET_PARAM(SonicParams, cyberspaceSV.modePackage.speed.boost.min, 20f);
@@ -235,6 +281,7 @@ Code "Cyber Space 2D Changes" by "cali_burrito"
     RFL_SET_PARAM(SonicParams, cyberspaceSV.modePackage.speed.boost2.max, 30f);
   }
 
-  if (isMomentumEnabled)
+  // Ground Momentum
+  if (momentumVal != 0)
     RFL_SET_PARAM(SonicParams, cyberspaceSV.spinBoost.maxGravityDecele, 0f);
 }
