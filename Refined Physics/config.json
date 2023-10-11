@@ -2,77 +2,42 @@
   "Groups": [
     {
       "Name": "global",
-      "DisplayName": "Sonic - Universal Tweaks",
+      "DisplayName": "Sonic - Global Tweaks",
       "Elements": [
         {
           "Name": "momentum",
-          "DisplayName": "Running Momentum",
-          "Description": [
-            "Allows Sonic to gain, lose, and retain speed while running naturally.\n",
-            "Sonic's jump speed limit has been increased, allowing incline jumps to be easier to perform.\n",
-            "Conflicts with 'Retain Velocity When Jumping Up Slopes' HMM code."
-          ],
-          "Type": "bool",
-          "DefaultValue": true
-        },
-        {
-          "Name": "railMomentum",
-          "DisplayName": "Rail Momentum",
-          "Description": [
-            "Allows Sonic to gain, lose, and retain speed while rail grinding naturally.\n",
-            "Sonic still has a minimum grinding speed, but it has been reduced."
-          ],
-          "Type": "bool",
-          "DefaultValue": true
+          "DisplayName": "Momentum",
+          "Type": "MomentumOptions",
+          "DefaultValue": 1
         },
         {
           "Name": "chargableSpinDash",
           "DisplayName": "Chargable Spin Dash & Rolling",
           "Description": [
-            "Enables spin charging to determine the spin dash speed. 5 charges = max dash speed.\n",
-            "Due to the charge requirement to dash, holding the spin dash button without charging makes the ability act like a roll in the classic games.\n",
-            "If momentum is enabled, the spin dash will be momentum-based."
+            "Makes the spin dash work like previous Sonic games.\n",
+            "If the momentum tweak is enabled, the spin dash physics will be momentum-based.\n",
+            "Controls:",
+            "- Rolling: hold LT while moving, and release to uncurl. Sonic will auto-uncurl at a low speed if momentum is enabled.",
+            "- Charging: hold or spam LT while holding the crouch button. 5 presses of LT will let Sonic dash at max speed.",
+            "- Dashing: release the crouch button after charging. Releasing LT will let Sonic uncurl.",
+            "- Drop Dash: while in the air, hold LT and Sonic will dash away once on the ground. Releasing LT will let Sonic uncurl.\n",
+            "Enable the following HMM gameplay codes for the best experience:",
+            "- Allow Spin Dash on Dash Panels",
+            "- Always Trickable Spin Dash Exit",
+            "- Disable Drop Dash"
           ],
           "Type": "bool",
           "DefaultValue": true
         },
         {
           "Name": "noSpinChargeDecele",
-          "DisplayName": "Disable Air Spin Charge Deceleration",
+          "DisplayName": "Disable Spin Charge Air Deceleration",
           "Description": [
             "Prevents Sonic from coming to a halt when charging a spin dash in the air.\n",
-            "This makes it act like a normal drop dash, and makes it the recommended way to perform it.\n",
-            "It's recommended to enable the 'Disable Drop Dash' HMM code.\n",
-            "Conflicts with 'Disable Spin Charge Air Deceleration' HMM code."
+            "This makes it act like a traditional drop dash. It's recommend to use this over the normal drop dash.\n",
+            "Enable the 'Disable Drop Dash' gameplay code for the best experience.\n",
+            "Conflicts with 'Disable Spin Charge Air Deceleration' HMM physics code."
           ],
-          "Type": "bool",
-          "DefaultValue": true
-        },
-        {
-          "Name": "modifiedDashGravity",
-          "DisplayName": "Modified Spin Dash Gravity",
-          "Description": [
-            "Modifies the spin dash gravity to stop Sonic from staying in the air for too long, making it less overpowered."
-          ],
-          "Type": "bool",
-          "DefaultValue": true
-        },
-        {
-          "Name": "balancedBoost",
-          "DisplayName": "Balanced Boost Gauge",
-          "Description": [
-            "Re-balances the boost to account for Sonic's ability to retain speed very well.\n",
-            "The boost lasts much shorter, making it act more like a dash ability. The spin dash, however, lasts much longer.\n",
-            "Infinite boost now lasts for 2 minutes instead of 3. It's recommended to activate infinite boost when facing SQUID.\n",
-            "It's recommended to enable this if the 'Running Momentum' tweak is enabled."
-          ],
-          "Type": "bool",
-          "DefaultValue": true
-        },
-        {
-          "Name": "disableSpinMove",
-          "DisplayName": "Disable Spin Move",
-          "Description": ["Disables the Lost World ground rolling thing."],
           "Type": "bool",
           "DefaultValue": true
         }
@@ -93,8 +58,7 @@
           "Name": "cyberAirBoost",
           "DisplayName": "Cyber Space Air Boost",
           "Description": [
-            "Enables Cyber Space air boost physics (the only good thing about those physics IMO).\n",
-            "This air boost is momentum-based in a way? The faster Sonic was before air boosting, the longer the air boost lasts.\n"
+            "Enables Cyber Space air boost physics in the open zone."
           ],
           "Type": "bool",
           "DefaultValue": true
@@ -111,6 +75,18 @@
           "DisplayName": "Softer Wall Running Brake",
           "Description": [
             "Prevents Sonic from coming to an instant stop when letting go of the boost button while wall running."
+          ],
+          "Type": "bool",
+          "DefaultValue": true
+        },
+        {
+          "Name": "consistentParry",
+          "DisplayName": "Shorter Parry",
+          "Description": [
+            "Enables the new parry windows on Sonic, originally from the new characters.\n",
+            "Parry Windows:",
+            "Easy - 2 seconds",
+            "Medium - 2 seconds"
           ],
           "Type": "bool",
           "DefaultValue": true
@@ -131,7 +107,7 @@
           "DefaultValue": true
         },
         {
-          "Name": "openZoneRotation",
+          "Name": "openRotation",
           "DisplayName": "Open Zone Rotation",
           "Description": ["Enables open zone rotation movement."],
           "Type": "bool",
@@ -153,5 +129,41 @@
       ]
     }
   ],
+  "Enums": {
+    "MomentumOptions": [
+      {
+        "DisplayName": "Disabled",
+        "Value": 0,
+        "Description": ["No momentum is added to Sonic's movement."]
+      },
+      {
+        "DisplayName": "Momentum",
+        "Value": 1,
+        "Description": [
+          "Enables running and rail grinding momentum in the open zone and Cyber Space."
+        ]
+      },
+      {
+        "DisplayName": "Momentum Plus",
+        "Value": 2,
+        "Description": [
+          "Enables running and rail grinding momentum in the open zone and Cyber Space.\n",
+          "Plus mode allows for even more momentum, enabling Sonic to gain and retain speed easier.\n",
+          "Since Sonic doesn't need to rely on the boost anymore, it's been re-worked into a dash ability that provides a quick burst of speed. Upgrade Sonic's boost gauge to make the dash last longer!\n",
+          "The spin dash still drains the boost gauge, but much slower compared to boosting.\n",
+          "Additionally, infinite boost time has been reduced from 3 minutes to 2."
+        ]
+      },
+      {
+        "DisplayName": "Momentum Plus (Unbalanced)",
+        "Value": 3,
+        "Description": [
+          "Enables running and rail grinding momentum in the open zone and Cyber Space.\n",
+          "Plus mode allows for even more momentum, enabling Sonic to gain and retain speed easier.\n",
+          "This version does not re-work the boost mechanic. I don't recommend playing this way."
+        ]
+      }
+    ]
+  },
   "IniFile": "config.ini"
 }

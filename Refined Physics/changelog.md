@@ -1,3 +1,17 @@
+## Refined Physics v1.1
+
+- GLOBAL: Introduced new options for physics: `Momentum`, `Momentum Plus`, and `Momentum Plus (Unbalanced)`
+- GLOBAL: Merged `Rail Momentum` tweak into the `Momentum` options
+- GLOBAL: Merged `Balanced Boost` tweak into the `Momentum Plus` option
+- GLOBAL: Made spin dash speed slightly faster
+- GLOBAL: Implemented hold-to-charge for spin dash! Players can now choose to hold or spam the spin charge to build speed for the dash
+- GLOBAL: Players can now exit spin charging while in the air by letting go of LT
+- GLOBAL: Removed `Disable Spin Move` and `Modified Spin Dash Gravity` tweaks. I didn't like how they felt after more playing.
+- GLOBAL: Renamed `Universal Tweaks` to `Global Tweaks`
+- OPEN ZONE: Re-added the `Shorter Parry` tweak, which uses the parry timing values from Tails/Knux/Amy on Sonic
+
+> NOTICE: I'm taking suggestions for Tails, Knux, and Amy's controls. Please visit the [GameBanana page](https://gamebanana.com/mods/465508) and send over some feedback! Truth be told, I've never played Adventure, 06, or any of the Advance games, so I would love some references for their 3D and 2D gameplay. Thanks :D
+
 ## Refined Physics v1.0.1
 
 - Added `MathHelpers` library (I forgot lol)
