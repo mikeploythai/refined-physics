@@ -1,3 +1,0 @@
-add physics.hmm
-add config.json
-add mod.ini
